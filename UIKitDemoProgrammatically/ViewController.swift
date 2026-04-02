@@ -5,6 +5,7 @@
 //  Created by Claudio Villanueva on 26-03-26.
 //
 
+import SwiftUI
 import UIKit
 
 class ViewController: UIViewController {
@@ -23,7 +24,7 @@ class ViewController: UIViewController {
     private lazy var viewTwo = getView(color: .systemCyan)
     private lazy var viewThree = getView(color: .systemPurple)
 
-    private lazy var buttonOne = getButton(title: "Button 1", selector: #selector(buttonOneTapped(_:)))
+    private lazy var buttonOne = getButton(title: "Push SwiftUI screen", selector: #selector(buttonOneTapped(_:)))
     private lazy var buttonTwo = getButton(title: "Button 2", selector: #selector(buttonTwoTapped(_:)))
     private lazy var buttonThree = getButton(title: "Button 3", selector: #selector(buttonThreeTapped(_:)))
     
@@ -36,6 +37,7 @@ class ViewController: UIViewController {
     
     @objc func buttonOneTapped(_ sender: UIButton) {
         debugPrint("Button 1 tapped")
+        navigateToSwiftUIScreen()
     }
     
     @objc func buttonTwoTapped(_ sender: UIButton) {
@@ -108,5 +110,14 @@ extension ViewController {
         button.tintColor = .white
         button.addTarget(self, action: selector, for: .touchUpInside)
         return button
+    }
+}
+
+// Handling navigation
+extension ViewController {
+    @objc func navigateToSwiftUIScreen() {
+        debugPrint("Navigating to SwiftUI screen")
+        let hostingController = UIHostingController(rootView: SwiftUIView())
+        navigationController?.pushViewController(hostingController, animated: true)
     }
 }
